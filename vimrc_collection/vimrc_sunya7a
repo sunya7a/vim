@@ -6,7 +6,8 @@ set nocompatible
 
 """ Moving Around/Editing
 set cursorline              " have a line indicate the cursor location
-set ruler                   " show the cursor position all the time
+"set ruler                   " show the cursor position all the time
+set list                    " make whitespace characters visible
 set nostartofline           " Avoid moving cursor to BOL when jumping around
 set virtualedit=block       " Let cursor move past the last char in <C-v> mode
 set scrolloff=3             " Keep 3 context lines above and below the cursor
@@ -16,21 +17,30 @@ set nowrap                  " don't wrap text
 set linebreak               " don't wrap textin the middle of a word
 set autoindent              " always set autoindenting on
 set smartindent             " use smart indent if there is no indent file
-set tabstop=4               " <tab> inserts 4 spaces 
+set tabstop=4               " <tab> inserts 4 spaces
 set shiftwidth=4            " but an indent level is 2 spaces wide.
-set softtabstop=4           " <BS> over an autoindent deletes both spaces.
-set expandtab               " Use spaces, not tabs, for autoindent/tab key.
+set softtabstop=4           " <BS> over an autoindent deletes both spaces
+set expandtab               " Use spaces, not tabs, for autoindent/tab key
 set shiftround              " rounds indent to a multiple of shiftwidth
 set matchpairs+=<:>         " show matching <> (html mainly) as well
 set foldmethod=indent       " allow us to fold on indents
 set foldlevel=99            " don't fold by default
+set colorcolumn=80          " draw a line on column 80
 
-"""" Messages, Info, Status
-set confirm                 " Y-N-C prompt if closing with unsaved changes.
+""" Highlight unwanted whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+""" Messages, Info, Status
+set confirm                 " Y-N-C prompt if closing with unsaved changes
 set ls=2                    " allways show status line
-set showcmd                 " Show incomplete normal mode commands as I type.
-set report=0                " : commands always print changed line count.
-set laststatus=2            " Always show statusline, even if only 1 window.
+set showcmd                 " Show incomplete normal mode commands as I type
+set report=0                " : commands always print changed line count
+set laststatus=2            " Always show statusline, even if only 1 window
 
 
 " ==========================================================
