@@ -7,7 +7,7 @@ set nocompatible
 """ Moving Around/Editing
 set cursorline              " have a line indicate the cursor location
 "set ruler                   " show the cursor position all the time
-set list                    " make whitespace characters visible
+"set list                    " make whitespace characters visible
 set nostartofline           " Avoid moving cursor to BOL when jumping around
 set virtualedit=block       " Let cursor move past the last char in <C-v> mode
 set scrolloff=3             " Keep 3 context lines above and below the cursor
@@ -34,6 +34,7 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
 """ Messages, Info, Status
 set confirm                 " Y-N-C prompt if closing with unsaved changes
